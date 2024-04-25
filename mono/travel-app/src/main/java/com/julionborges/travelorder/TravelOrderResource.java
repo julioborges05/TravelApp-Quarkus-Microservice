@@ -29,9 +29,9 @@ public class TravelOrderResource {
     }
 
     @POST
+    @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
     public TravelOrder save(TravelOrder travelOrder) {
         travelOrder.setId(null);
         travelOrder.persist();
