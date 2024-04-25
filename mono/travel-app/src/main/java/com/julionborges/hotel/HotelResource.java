@@ -39,4 +39,28 @@ public class HotelResource {
         return hotel;
     }
 
+    @PUT
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Hotel updateHotel(Hotel hotel) {
+        Optional<Hotel> optionalHotel = Hotel.findByIdOptional(hotel.getId());
+
+        if(optionalHotel.isEmpty())
+            throw new NotFoundException("Não encontrado!");
+
+        Hotel dbHotel = optionalHotel.get();
+        dbHotel.setTravelOrderId(hotel.getTravelOrderId());
+        dbHotel.setNights(hotel.getNights());
+        dbHotel.persist();
+
+        return dbHotel;
+    }
+
+    @DELETE
+    @Transactional
+    public void deleteById(@QueryParam("id") Long id) {
+        Hotel.deleteById(id);
+    }
+
 }
