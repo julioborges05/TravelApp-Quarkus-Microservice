@@ -28,6 +28,18 @@ public class FlightResource {
         return optionalFlight.get();
     }
 
+    @GET
+    @Path("findByTravelOrderId")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Flight findByTravelOrderId(@QueryParam("travelOrderId") Long travelOrderId) {
+        Optional<Flight> optionalFlight = Flight.findByTravelOrderId(travelOrderId);
+
+        if(optionalFlight.isEmpty())
+            throw new NotFoundException("Não encontrado!");
+
+        return optionalFlight.get();
+    }
+
     @POST
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)

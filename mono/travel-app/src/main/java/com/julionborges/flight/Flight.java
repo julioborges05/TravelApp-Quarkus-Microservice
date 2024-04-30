@@ -3,6 +3,8 @@ package com.julionborges.flight;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
+import java.util.Optional;
+
 @Entity
 public class Flight extends PanacheEntityBase {
 
@@ -17,6 +19,19 @@ public class Flight extends PanacheEntityBase {
     private Long travelOrderId;
     private String fromAirport;
     private String toAirport;
+
+    public Flight() {
+    }
+
+    public Flight(Long travelOrderId, String fromAirport, String toAirport) {
+        this.travelOrderId = travelOrderId;
+        this.fromAirport = fromAirport;
+        this.toAirport = toAirport;
+    }
+
+    public static Optional<Flight> findByTravelOrderId(Long travelOrderId) {
+        return Flight.find("travelOrderId", travelOrderId).singleResultOptional();
+    }
 
     public Long getId() {
         return id;

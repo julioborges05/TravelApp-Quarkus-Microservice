@@ -3,6 +3,8 @@ package com.julionborges.hotel;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
+import java.util.Optional;
+
 @Entity
 public class Hotel extends PanacheEntityBase {
 
@@ -16,6 +18,18 @@ public class Hotel extends PanacheEntityBase {
     private Long id;
     private Long travelOrderId;
     private Integer nights;
+
+    public Hotel() {
+    }
+
+    public Hotel(Long travelOrderId, Integer nights) {
+        this.travelOrderId = travelOrderId;
+        this.nights = nights;
+    }
+
+    public static Optional<Hotel> findByTravelOrderId(Long travelOrderId) {
+        return Hotel.find("travelOrderId", travelOrderId).singleResultOptional();
+    }
 
     public Long getId() {
         return id;

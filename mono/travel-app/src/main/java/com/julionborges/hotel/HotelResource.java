@@ -28,6 +28,18 @@ public class HotelResource {
         return optionalHotel.get();
     }
 
+    @GET
+    @Path("findByTravelOrderId")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Hotel findByTravelOrderId(@QueryParam("travelOrderId") Long travelOrderId) {
+        Optional<Hotel> optionalHotel = Hotel.findByTravelOrderId(travelOrderId);
+
+        if(optionalHotel.isEmpty())
+            throw new NotFoundException("Não encontrado!");
+
+        return optionalHotel.get();
+    }
+
     @POST
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
