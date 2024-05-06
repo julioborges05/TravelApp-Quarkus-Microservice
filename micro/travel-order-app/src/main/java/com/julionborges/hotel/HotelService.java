@@ -10,10 +10,6 @@ import java.util.List;
 public interface HotelService {
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<HotelDTO> listAll();
-
-    @GET
     @Path("findById")
     @Produces(MediaType.APPLICATION_JSON)
     public HotelDTO findById(Long id);
@@ -21,20 +17,12 @@ public interface HotelService {
     @GET
     @Path("findByTravelOrderId")
     @Produces(MediaType.APPLICATION_JSON)
-    public HotelDTO findByTravelOrderId(Long travelOrderId);
+    public HotelDTO findByTravelOrderId(@QueryParam("travelOrderId") Long travelOrderId);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public HotelDTO save(HotelDTO hotel);
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public HotelDTO updateHotel(HotelDTO hotel);
-
-    @DELETE
-    public void deleteById(Long id);
 
 
 }

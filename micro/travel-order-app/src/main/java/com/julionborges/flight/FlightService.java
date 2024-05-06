@@ -10,10 +10,6 @@ import java.util.List;
 public interface FlightService {
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<FlightDTO> listAll();
-
-    @GET
     @Path("findById")
     @Produces(MediaType.APPLICATION_JSON)
     public FlightDTO findById(Long id);
@@ -21,19 +17,11 @@ public interface FlightService {
     @GET
     @Path("findByTravelOrderId")
     @Produces(MediaType.APPLICATION_JSON)
-    public FlightDTO findByTravelOrderId(Long travelOrderId);
+    public FlightDTO findByTravelOrderId(@QueryParam("travelOrderId") Long travelOrderId);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public FlightDTO save(FlightDTO flight);
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public FlightDTO update(FlightDTO flight);
-
-    @DELETE
-    public void deleteById(Long id);
 
 }
