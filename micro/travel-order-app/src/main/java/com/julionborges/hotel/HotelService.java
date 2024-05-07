@@ -10,7 +10,7 @@ public interface HotelService {
     @GET
     @Path("findById")
     @Produces(MediaType.APPLICATION_JSON)
-    public HotelDTO findById(Long id);
+    public HotelDTO findById(@QueryParam("id") Long id);
 
     @GET
     @Path("findByTravelOrderId")

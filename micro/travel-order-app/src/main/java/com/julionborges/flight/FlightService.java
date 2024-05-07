@@ -10,7 +10,7 @@ public interface FlightService {
     @GET
     @Path("findById")
     @Produces(MediaType.APPLICATION_JSON)
-    public FlightDTO findById(Long id);
+    public FlightDTO findById(@QueryParam("id") Long id);
 
     @GET
     @Path("findByTravelOrderId")
