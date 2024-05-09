@@ -1,0 +1,32 @@
+# Run the following commands before use this yaml:
+#
+#  cd flight-app
+#  ./mvnw package
+#  docker build -f src/main/docker/Dockerfile.jvm -t julioborges05/flight-app-jvm .
+#  docker push julioborges05/flight-app-jvm
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flight-app
+  labels:
+    app: flight-app
+spec:
+  containers:
+    - name: flight-app
+      image: julioborges05/flight-app-jvm:latest
+      ports:
+        - containerPort: 8081
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flight-app-svc
+spec:
+  selector:
+    app: flight-app
+  ports:
+    - port: 8081
+      targetPort: 8081
+  type: LoadBalancer

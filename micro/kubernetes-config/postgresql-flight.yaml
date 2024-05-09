@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgresql-flight
+  labels:
+    app: postgresql-flight
+spec:
+  containers:
+    - name: postgres
+      image: 'postgres:latest'
+      ports:
+        - containerPort: 5432
+      env:
+        - name: POSTGRES_PASSWORD
+          value: quarkus
+        - name: POSTGRES_USER
+          value: quarkus
+        - name: POSTGRES_DB
+          value: flight-app
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgresql-flight
+spec:
+  ports:
+    - name: pgsql
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+  selector:
+    app: postgresql-flight
