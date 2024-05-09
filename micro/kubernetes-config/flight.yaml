@@ -1,10 +1,3 @@
-# Run the following commands before use this yaml:
-#
-#  cd flight-app
-#  ./mvnw package
-#  docker build -f src/main/docker/Dockerfile.jvm -t julioborges05/flight-app-jvm .
-#  docker push julioborges05/flight-app-jvm
-
 apiVersion: v1
 kind: Pod
 metadata:

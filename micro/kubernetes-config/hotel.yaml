@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hotel-app
+  labels:
+    app: hotel-app
+spec:
+  containers:
+    - name: hotel-app
+      image: julioborges05/hotel-app-jvm:latest
+      ports:
+        - containerPort: 8082
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotel-app-svc
+spec:
+  selector:
+    app: hotel-app
+  ports:
+    - port: 8082
+      targetPort: 8082
+  type: LoadBalancer
