@@ -1,15 +1,24 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: hotel-app
   labels:
     app: hotel-app
 spec:
-  containers:
-    - name: hotel-app
-      image: julioborges05/hotel-app-jvm:latest
-      ports:
-        - containerPort: 8082
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hotel-app
+  template:
+    metadata:
+      labels:
+        app: hotel-app
+    spec:
+      containers:
+        - name: hotel-app
+          image: julioborges05/hotel-app-jvm:latest
+          ports:
+            - containerPort: 8082
 
 ---
 apiVersion: v1
